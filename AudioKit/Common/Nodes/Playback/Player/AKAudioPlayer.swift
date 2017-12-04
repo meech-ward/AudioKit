@@ -9,6 +9,9 @@
 /// Not so simple audio playback class
 open class AKAudioPlayer: AKNode, AKToggleable {
 
+    @objc open var audioPlayerNode: AVAudioPlayerNode {
+        return internalPlayer
+    }
     // MARK: - Private variables
     fileprivate var internalAudioFile: AKAudioFile
     fileprivate var internalPlayer = AVAudioPlayerNode()
@@ -524,6 +527,10 @@ open class AKAudioPlayer: AKNode, AKToggleable {
             self.stop()
             self.completionHandler?()
         }
+    }
+
+    @objc open func restart() {
+        updatePCMBuffer()
     }
 
     /// Fills the buffer with data read from internalAudioFile
